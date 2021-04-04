@@ -86,18 +86,23 @@ def menu():
         goalState = [6, 8]
 
     if option == 3:
-        map = np.array([[inf, -1 , -1,  -1, -1, -1, inf, inf, inf, inf],
-                       [inf, inf, inf, -1, -1, -1, inf, inf, inf, inf],
-                       [inf, -1 , inf, -1, inf, inf, inf, inf, inf, inf],
-                       [inf, -1 , inf, -1, inf, inf, -1, -1, -1, inf],
-                       [inf, -1,  inf, inf, inf, inf, inf, -1, -1, inf],
-                       [-1,  -1,  inf, inf, -1, -1, inf, inf, inf, inf],
-                       [-1,  -1,  inf, inf, inf, inf, inf, -1, 0, inf],
-                       [inf, inf, inf, -1, -1, -1, inf, -1, inf, inf],
-                       [inf, inf, inf, inf, inf, -1, inf, inf, inf, -1],
-                       [inf, inf, -1, -1, -1, -1, inf, inf, -1, -1]])       
+        map = np.array([[inf, -1 , -1,  -1,  -1,  -1,  inf, inf, inf, -1, -1, inf, -1, -1, -1],
+                [inf, inf, inf, -1,  -1,  -1,  inf, inf, inf, -1, -1, -1, inf, -1, -1],
+                [inf, -1 , inf, -1,  inf, inf, inf, inf, inf, -1, -1, inf, inf, -1, -1],
+                [inf, -1 , inf, -1,  inf, inf, -1,  -1,  -1,  -1, inf, inf, inf, inf, inf],
+                [inf, -1,  inf, inf, inf, inf, inf, -1,  -1,  inf, inf, -1, inf, inf, inf],
+                [-1,  -1,  inf, inf, -1,  -1,  inf, -1, -1,  inf, inf, inf, inf, -1, -1],
+                [-1,  -1,  inf, inf, inf, inf, inf, inf,  -1,  inf, inf, inf, inf, -1, -1],
+                [inf, inf, inf, -1,  -1,  -1,  inf, inf, inf, inf, inf, -1, inf, inf, inf],
+                [-1,  inf, inf, inf, inf, -1,  inf, inf, inf, -1, inf, -1, inf, -1, -1],
+                [inf,  inf, -1,  -1,  -1,  -1,  inf, inf, -1, -1, inf, -1, inf, inf, inf],
+                [inf,  inf, -1,  -1,  -1,  -1,  inf, inf, -1, -1, inf, -1, inf, inf, inf],
+                [-1,  inf, -1,  -1,  -1,  -1,  -1, -1, -1, -1, inf, inf, inf, inf, -1],
+                [-1,  inf, -1,  -1,  -1,  -1,  -1, -1, -1, -1, -1, inf, inf, inf, inf],
+                [-1,  -1, -1,  -1,  -1,  -1,  -1, -1, -1, -1, inf, inf, -1, inf, inf],
+                [-1,  -1, -1,  -1,  -1,  -1,  -1, -1, -1, -1, inf, inf, -1, inf, 0]])     
        
-        goalState = [6, 8]
+        goalState = [14, 14]
    
 
     print('Choose a searching method:')
