@@ -10,6 +10,10 @@ class World:
 
         (self.rows, self.columns) = self.map.shape
 
+    def calculateBranchingFactor(self, n, d):
+        b = n**(1/d)
+        return b
+
 
     def discard_successors_marios_perspective(self, successors):
         filtered_successors = []
@@ -29,6 +33,8 @@ class World:
     def find_position_shortest_pipe_from_A_algoritm(self, mario_position, pipe_position):
         open = queue.SimpleQueue()
         cost = 0
+        expandedStates = 0
+     
 
         # start A* from Mario:
         open.put(mario_position)
@@ -39,7 +45,8 @@ class World:
 
             # Goal Test: return pipe's position
             if self.map[state[0]][state[1]] == self.settings.PIPE:
-                return True, state
+                branchingFactor = self.calculateBranchingFactor(expandedStates, cost)
+                return True, state, branchingFactor
 
             # Mark state as visited
             self.map[state[0]][state[1]] = self.settings.VISITED
@@ -49,6 +56,7 @@ class World:
             successors = self.agent.transition_function_A(state, actions)
             successors = self.discard_successors_marios_perspective(successors)
 
+            expandedStates = len(successors) + expandedStates
             
             # calculate the heuristic function and the f value of the successors
             optionList = []
@@ -72,11 +80,14 @@ class World:
             cost = cost + 1
 
          # No solution
-        return False, None
+        return False, None, None
 
 
     def find_position_shortest_pipe_from(self, mario_position):
         open = queue.SimpleQueue()
+        cost = 0
+        expandedStates = 0
+     
 
         # start bfs from Mario:
         open.put(mario_position)
@@ -86,22 +97,28 @@ class World:
 
             # Goal Test: return pipe's position
             if self.map[state[0]][state[1]] == self.settings.PIPE:
-                return True, state
+                branchingFactor = self.calculateBranchingFactor(expandedStates, cost)
+                return True, state, branchingFactor
 
             # Mark state as visited
             self.map[state[0]][state[1]] = self.settings.VISITED
-
+            
             # Transition Function
             actions = [self.settings.NORTH, self.settings.SOUTH, self.settings.WEST, self.settings.EAST]
             successors = self.agent.transition_function_BFS(state, actions)
             successors = self.discard_successors_marios_perspective(successors)
 
+            expandedStates = len(successors) + expandedStates
+            
             # Put the successors into the queue
             for successor in successors:
                 open.put(successor)
 
+            #the cost increments
+            cost = cost + 1
+
         # No solution
-        return False, None
+        return False, None, None
 
     
 

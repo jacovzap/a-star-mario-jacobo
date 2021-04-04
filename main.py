@@ -18,11 +18,12 @@ def second_approach(Map):
     world = World(map, settings, agent)
     mario_position = [0, 0]
 
-    success, pipe_position = world.find_position_shortest_pipe_from(mario_position)
+    success, pipe_position, branchingFactor = world.find_position_shortest_pipe_from(mario_position)
 
     if success:
         print('Shortest pipe is at position:\n', pipe_position)
-        print('the way explored by BFS\n', map)
+        print('the best road found by BFS\n', map)
+        print('the branching Factor of BFS is: ', branchingFactor)
     else:
         print('No solution')
 
@@ -38,11 +39,14 @@ def third_approach(Map, goalState):
     mario_position = [0, 0]
     pipe_position = goalState
 
-    success, pipe_position = world.find_position_shortest_pipe_from_A_algoritm(mario_position, pipe_position)
+    success, pipe_position, branchingFactor = world.find_position_shortest_pipe_from_A_algoritm(mario_position, pipe_position)
 
+    
+    
     if success:
         print('Shortest pipe is at position:\n', pipe_position)
-        print('the way explored by A*\n', map)
+        print('the best road found by A*\n', map)
+        print('the branching Factor of A* is: ', branchingFactor)
     else:
         print('No solution')
 
@@ -52,14 +56,14 @@ def menu():
     inf = math.inf
     map = []
 
-    print('Elija un tipo de dificultad')
-    print('1. Facil')
-    print('2. Medio')
-    print('3. Dificil')
+    print('Choose the difficult')
+    print('1. easy')
+    print('2. medium')
+    print('3. hard')
 
     option = int(input())
 
-    if(option == 1):
+    if option == 1:
         map = np.array([[inf, -1 , inf,  0],
                        [inf, inf, inf, -1],
                        [inf, -1 , inf, -1],
@@ -67,7 +71,7 @@ def menu():
 
         goalState = [0, 3]
     
-    if(option == 2):
+    if option == 2:
         map = np.array([[inf, -1 , -1,  -1, -1, -1, inf, inf, inf, inf],
                        [inf, inf, inf, -1, -1, -1, inf, inf, inf, inf],
                        [inf, -1 , inf, -1, inf, inf, inf, inf, inf, inf],
@@ -81,7 +85,7 @@ def menu():
 
         goalState = [6, 8]
 
-    if(option == 3):
+    if option == 3:
         map = np.array([[inf, -1 , -1,  -1, -1, -1, inf, inf, inf, inf],
                        [inf, inf, inf, -1, -1, -1, inf, inf, inf, inf],
                        [inf, -1 , inf, -1, inf, inf, inf, inf, inf, inf],
@@ -96,15 +100,15 @@ def menu():
         goalState = [6, 8]
    
 
-    print('Elija el algoritmo de Busqueda:')
+    print('Choose a searching method:')
     print('1. BFS')
     print('2. A*')
 
     option = int(input())
 
-    if(option == 1):
+    if option == 1:
         second_approach(map)
-    if(option == 2):
+    if option == 2:
         third_approach(map, goalState)
 
 
